@@ -1,0 +1,86 @@
+[
+  {
+    "id": "hero",
+    "title": "Retrato Hero - Claroscuro",
+    "dominantColor": "rgb(105, 109, 157)",
+    "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-01",
+    "title": "Retrato Autor 01",
+    "dominantColor": "rgb(142, 140, 136)",
+    "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-02",
+    "title": "Editorial Nocturno",
+    "dominantColor": "rgb(30, 108, 138)",
+    "url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-03",
+    "title": "Sombra y Luz Análoga",
+    "dominantColor": "rgb(126, 116, 104)",
+    "url": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-04",
+    "title": "Estudio Chiaroscuro",
+    "dominantColor": "rgb(53, 48, 47)",
+    "url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-05",
+    "title": "Serie 120mm CDMX",
+    "dominantColor": "rgb(99, 108, 115)",
+    "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-06",
+    "title": "Hora Azul Estudio",
+    "dominantColor": "rgb(158, 147, 145)",
+    "url": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-07",
+    "title": "Silueta Lunar",
+    "dominantColor": "rgb(155, 121, 104)",
+    "url": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-08",
+    "title": "Retrato Tinta",
+    "dominantColor": "rgb(40, 34, 27)",
+    "url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-09",
+    "title": "Campaña Nocturna",
+    "dominantColor": "rgb(86, 85, 76)",
+    "url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-10",
+    "title": "Fotografía de Autor",
+    "dominantColor": "rgb(159, 116, 90)",
+    "url": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-11",
+    "title": "Noche Brutalista",
+    "dominantColor": "rgb(129, 152, 159)",
+    "url": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "obra-12",
+    "title": "Estudio Taller",
+    "dominantColor": "rgb(35, 28, 24)",
+    "url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=2400&q=85"
+  },
+  {
+    "id": "estudio",
+    "title": "Taller de Revelado",
+    "dominantColor": "rgb(174, 179, 176)",
+    "url": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=2400&q=85"
+  }
+]
