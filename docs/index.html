@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luna Azul — Fotografía · Ciudad de México</title>
+  <meta name="description" content="Estudio de fotografía analógica y digital en Santa María la Ribera, CDMX. Retrato de autor, editorial y archivo iluminados por la luna.">
+
+  <!-- Preload Above-The-Fold Assets -->
+  <link rel="preload" href="assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Archivo-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/obras/hero-1600.avif" as="image">
+
+  <!-- OpenGraph / Social Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luna Azul — Fotografía · CDMX">
+  <meta property="og:description" content="Estudio de fotografía de autor en Ciudad de México.">
+  <meta property="og:image" content="assets/img/og-image.jpg">
+  <meta name="theme-color" content="#080B10">
+
+  <!-- Favicons -->
+  <link rel="icon" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/componentes.css">
+
+  <!-- JSON-LD LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PhotographicStudio",
+    "name": "Luna Azul Foto",
+    "image": "assets/img/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cuauhtémoc",
+      "addressRegion": "CDMX",
+      "streetAddress": "Santa María la Ribera",
+      "addressCountry": "MX"
+    },
+    "telephone": "+525540952041",
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- 01. PRELOADER -->
+  <aside id="preloader" class="preloader" aria-label="Cargando experiencia">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <span class="mono" style="color: var(--niebla);">LUNA AZUL FOTO ®</span>
+      <span class="mono" style="color: var(--laton);">CALIBRANDO ÓPTICA</span>
+    </div>
+    <div>
+      <div id="preloader-contador" class="preloader-contador">00</div>
+      <div class="preloader-barra">
+        <div id="preloader-progreso" class="preloader-progreso"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CURSOR PERSONALIZADO DE ENCUADRE -->
+  <div id="cursor-encuadre" class="cursor-encuadre" aria-hidden="true">
+    <div class="cursor-box">
+      <span class="cursor-focal">35 MM</span>
+    </div>
+  </div>
+
+  <!-- PREVIEW FLOTANTE DE SERVICIOS -->
+  <div id="preview-flotante" class="preview-flotante" aria-hidden="true">
+    <img src="assets/img/obras/obra-01-900.webp" alt="Vista previa de servicio">
+  </div>
+
+  <!-- 02. HEADER FIJO -->
+  <header id="header-sitio" class="header-sitio">
+    <a href="#hero" class="header-brand">
+      <img src="assets/img/logo-512.png" alt="Luna Azul Logo">
+      <span class="mono" style="font-size: 0.8rem; letter-spacing: 0.12em;">LUNA AZUL <span class="marca-reg">®</span></span>
+    </a>
+    <nav class="header-nav" aria-label="Navegación principal">
+      <a href="#obra" class="nav-link">OBRA</a>
+      <a href="#estudio" class="nav-link">ESTUDIO</a>
+      <a href="#servicios" class="nav-link">SERVICIOS</a>
+      <a href="#reserva" class="nav-link">RESERVAR</a>
+    </nav>
+    <div class="header-agenda">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="agenda-punto"></span>
+        <span class="mono" style="font-size: 0.68rem; color: var(--niebla);">AGENDA ABIERTA — JULIO 2026</span>
+      </div>
+      <a href="#reserva" class="btn-reservar">RESERVAR</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 03. HERO — RETRATO ILUMINADO POR LA LUNA -->
+    <section id="hero" class="hero-seccion">
+      <!-- Capa 1: Portrait del Hero -->
+      <div class="hero-portrait-wrapper">
+        <picture>
+          <source srcset="assets/img/obras/hero-2400.avif 2400w, assets/img/obras/hero-1600.avif 1600w, assets/img/obras/hero-900.avif 900w" type="image/avif">
+          <source srcset="assets/img/obras/hero-2400.webp 2400w, assets/img/obras/hero-1600.webp 1600w, assets/img/obras/hero-900.webp 900w" type="image/webp">
+          <img src="assets/img/obras/hero-1600.jpg" alt="Retrato fotográfico iluminado por la luna" class="hero-portrait-img" fetchpriority="high">
+        </picture>
+        <div class="hero-scrim"></div>
+      </div>
+
+      <!-- Capa 2: Canvas WebGL2 Luna Real -->
+      <canvas id="hero-canvas-luna" class="hero-canvas-luna"></canvas>
+      
+      <!-- Fallback Póster Luna cuando WebGL no está activo -->
+      <img id="hero-poster-fallback" src="assets/img/luna-poster.webp" alt="Luna poster" style="display: none; position: absolute; top: 10%; right: 10%; width: 400px; z-index: 3; pointer-events: none;">
+
+      <!-- Capa 3: Esquinas de Encuadre Visor -->
+      <div class="hero-esquinas">
+        <div class="hero-esquina-bl"></div>
+        <div class="hero-esquina-br"></div>
+      </div>
+
+      <!-- Kicker Superior -->
+      <div class="hero-kicker mono">
+        FOTOGRAFÍA — SANTA MARÍA LA RIBERA, CDMX
+      </div>
+
+      <!-- Wordmark Gigante -->
+      <div class="hero-wordmark-container">
+        <h1 class="hero-wordmark">
+          Luna Azul
+          <span class="sub">estudio de fotografía de autor</span>
+        </h1>
+      </div>
+
+      <!-- Capa 5: HUD Telemetría (3 Renglones) -->
+      <aside id="hero-hud" class="hero-hud mono" aria-label="Telemetría lunar en tiempo real">
+        <div class="hud-linea">
+          <span>FASE</span>
+          <span id="hud-val-fase" class="hud-val">GIBOSA CRECIENTE · 73.4%</span>
+        </div>
+        <div class="hud-linea">
+          <span>ALTITUD</span>
+          <span id="hud-val-alt" class="hud-val">+41.2°</span>
+        </div>
+        <div class="hud-linea">
+          <span>HORA AZUL</span>
+          <span id="hud-val-azul" class="hud-val">20:14 — 20:33</span>
+          <button class="hud-toggle-mas" aria-label="Ver más datos de telemetría">+</button>
+        </div>
+      </aside>
+
+      <!-- Scroll Cue Indicator -->
+      <div class="hero-scroll-cue" aria-hidden="true"></div>
+    </section>
+
+    <!-- 04. OBRA SELECCIONADA -->
+    <section id="obra" class="seccion">
+      <div class="seccion-cabecera">
+        <div>
+          <span class="mono" style="color: var(--laton);">LA-2026-ARCH</span>
+          <h2 class="seccion-titulo">Obra <span class="italica">seleccionada</span></h2>
+        </div>
+        <span class="mono" style="color: var(--niebla);">6 SERIES · 35/120 MM</span>
+      </div>
+
+      <div class="grid-12">
+        <!-- Pieza 01 -->
+        <article class="col-span-7-left pieza-obra revelar" data-focal="50 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-01-1600.avif 1600w, assets/img/obras/obra-01-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-01-1600.webp 1600w, assets/img/obras/obra-01-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-01-1600.jpg" alt="Retrato de Autor en claroscuro" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">RETRATO</span>
+              <span class="pieza-titulo">Nocturno en la Ribera</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-014 · 2026</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Pieza 02 -->
+        <article class="col-span-5-right pieza-obra revelar" data-focal="85 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-02-1600.avif 1600w, assets/img/obras/obra-02-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-02-1600.webp 1600w, assets/img/obras/obra-02-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-02-1600.jpg" alt="Editorial nocturno en luz fría" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">EDITORIAL</span>
+              <span class="pieza-titulo">Sombra Lunar</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-018 · 2026</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Pieza 03 -->
+        <article class="col-span-6-left pieza-obra revelar" data-focal="35 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-03-1600.avif 1600w, assets/img/obras/obra-03-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-03-1600.webp 1600w, assets/img/obras/obra-03-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-03-1600.jpg" alt="Estudio análogo de textura y luz" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">ANÁLOGO</span>
+              <span class="pieza-titulo">Silueta de Tungsteno</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-022 · 2025</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Pieza 04 -->
+        <article class="col-span-5-mid pieza-obra revelar" data-focal="120 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-04-1600.avif 1600w, assets/img/obras/obra-04-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-04-1600.webp 1600w, assets/img/obras/obra-04-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-04-1600.jpg" alt="Estudio de claroscuro profundo" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">ESTUDIO</span>
+              <span class="pieza-titulo">Cuerpo de Luz</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-029 · 2026</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Pieza 05 -->
+        <article class="col-span-9-left pieza-obra revelar" data-focal="50 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-05-1600.avif 1600w, assets/img/obras/obra-05-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-05-1600.webp 1600w, assets/img/obras/obra-05-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-05-1600.jpg" alt="Serie de formato medio en locación" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">ARCHIVO</span>
+              <span class="pieza-titulo">Negativo N.º 407</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-031 · 2026</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <!-- Pieza 06 -->
+        <article class="col-span-4-right pieza-obra revelar" data-focal="85 MM">
+          <!-- FOTO: reemplazar por obra real del cliente -->
+          <figure>
+            <picture>
+              <source srcset="assets/img/obras/obra-06-1600.avif 1600w, assets/img/obras/obra-06-900.avif 900w" type="image/avif">
+              <source srcset="assets/img/obras/obra-06-1600.webp 1600w, assets/img/obras/obra-06-900.webp 900w" type="image/webp">
+              <img src="assets/img/obras/obra-06-1600.jpg" alt="Hora azul en el estudio" loading="lazy" decoding="async">
+            </picture>
+            <figcaption class="pieza-caption">
+              <span class="mono" style="color: var(--niebla);">HORA AZUL</span>
+              <span class="pieza-titulo">Diecinueve Minutos</span>
+              <span class="mono" style="color: var(--laton);">LA-2026-035 · 2026</span>
+            </figcaption>
+          </figure>
+        </article>
+      </div>
+    </section>
+
+    <!-- 05. HOJA DE CONTACTOS (HORIZONTAL STICKY) -->
+    <section id="hoja-contactos-contenedor" class="hoja-contactos-contenedor">
+      <div class="hoja-contactos-sticky">
+        <div style="padding: 1.5rem var(--pad-site); display: flex; justify-content: space-between; align-items: center;">
+          <span class="mono" style="color: var(--laton);">CONTACT SHEET · ROLLO 120 MM</span>
+          <span class="mono" style="color: var(--niebla);">DESLIZA PARA NAVEGAR ARCHIVO →</span>
+        </div>
+        <div id="hoja-contactos-track" class="hoja-contactos-track">
+          <!-- 8 Cuadros de Hoja de Contactos -->
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-07-900.webp" alt="Cuadro 01A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 01A — ƒ/2.8 — 1/125</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-08-900.webp" alt="Cuadro 02A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 02A — ƒ/2.0 — 1/250</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-09-900.webp" alt="Cuadro 03A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 03A — ƒ/4.0 — 1/60</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-10-900.webp" alt="Cuadro 04A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 04A — ƒ/1.8 — 1/500</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-11-900.webp" alt="Cuadro 05A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 05A — ƒ/2.8 — 1/125</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-12-900.webp" alt="Cuadro 06A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 06A — ƒ/5.6 — 1/30</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-01-900.webp" alt="Cuadro 07A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 07A — ƒ/2.8 — 1/125</span>
+          </article>
+          <article class="hoja-cuadro">
+            <img src="assets/img/obras/obra-02-900.webp" alt="Cuadro 08A" loading="lazy">
+            <span class="mono" style="font-size: 0.65rem; color: var(--niebla);">CUADRO 08A — ƒ/2.0 — 1/250</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. LA FRASE (frase.jpg TRANSCRITA EN HTML) -->
+    <section class="frase-seccion">
+      <blockquote class="frase-texto revelar">
+        “Deteniendo el tiempo y capturando momentos para siempre...”
+      </blockquote>
+      <cite class="mono" style="color: var(--laton); font-style: normal;">@luna_azulfoto01</cite>
+    </section>
+
+    <!-- 07. EL ESTUDIO -->
+    <section id="estudio" class="seccion">
+      <div class="seccion-cabecera">
+        <div>
+          <span class="mono" style="color: var(--laton);">EL TALLER</span>
+          <h2 class="seccion-titulo">Fundado en <span class="italica">Santa María la Ribera</span></h2>
+        </div>
+        <span class="mono" style="color: var(--niebla);">ESTUDIO & LABORATORIO</span>
+      </div>
+
+      <div class="estudio-grid">
+        <div>
+          <p style="font-family: var(--ff-display); font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-style: italic; line-height: 1.35; margin-bottom: 2rem; color: var(--hueso);">
+            Entendemos el retrato no como una pose, sino como una <span style="color: var(--laton);">conversación sostenida</span> bajo la temperatura exacta del cielo.
+          </p>
+          <p style="color: var(--niebla); margin-bottom: 1.5rem; max-width: 58ch;">
+            Luna Azul nació en 2019 en un antiguo taller de grabado de la colonia Santa María la Ribera. Trabajamos exclusivamente en formato medio 120mm y grano fino de 35mm, combinando óptica vintage Leica y Zeiss con escaneo de alta resolución.
+          </p>
+          <p style="color: var(--niebla); max-width: 58ch;">
+            Nos acompaña en el estudio un gato color humo llamado Tungsteno, que aparece sutilmente en el 4% de las sesiones de la tarde.
+          </p>
+        </div>
+
+        <div class="estudio-stats-grid">
+          <div class="stat-celda">
+            <span class="stat-numero" data-val="2019">0</span>
+            <span class="mono" style="color: var(--niebla);">AÑO FUNDADO</span>
+          </div>
+          <div class="stat-celda">
+            <span class="stat-numero" data-val="147">0</span>
+            <span class="mono" style="color: var(--niebla);">ROLLOS EN 2026</span>
+          </div>
+          <div class="stat-celda">
+            <span class="stat-numero" data-val="11">0</span>
+            <span class="mono" style="color: var(--niebla);">PORTADAS</span>
+          </div>
+          <div class="stat-celda">
+            <span class="stat-numero" data-val="3.2">0</span>
+            <span class="mono" style="color: var(--niebla);">KM NEGATIVO ESCANEADO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08. SERVICIOS = ÍNDICE -->
+    <section id="servicios" class="seccion">
+      <div class="seccion-cabecera">
+        <div>
+          <span class="mono" style="color: var(--laton);">CATÁLOGO</span>
+          <h2 class="seccion-titulo">Índice de <span class="italica">servicios</span></h2>
+        </div>
+        <span class="mono" style="color: var(--niebla);">TARIFAS EN MXN</span>
+      </div>
+
+      <div class="indice-tabla">
+        <div class="indice-fila" data-preview="assets/img/obras/obra-01-900.webp">
+          <span class="mono indice-num">01</span>
+          <h3 style="font-family: var(--ff-cuerpo); font-size: 1.1rem; font-weight: 400;">RETRATO DE AUTOR</h3>
+          <span class="mono" style="color: var(--niebla);">ESTUDIO · LUZ CONTINUA</span>
+          <span class="mono" style="color: var(--laton);">DESDE $9,800 MXN</span>
+          <span class="indice-flecha">→</span>
+        </div>
+        <!-- DATO DEMO: confirmar con cliente -->
+
+        <div class="indice-fila" data-preview="assets/img/obras/obra-02-900.webp">
+          <span class="mono indice-num">02</span>
+          <h3 style="font-family: var(--ff-cuerpo); font-size: 1.1rem; font-weight: 400;">EDITORIAL DE MODA</h3>
+          <span class="mono" style="color: var(--niebla);">LOCACIÓN · EQUIPO COMPLETO</span>
+          <span class="mono" style="color: var(--laton);">DESDE $28,000 MXN</span>
+          <span class="indice-flecha">→</span>
+        </div>
+
+        <div class="indice-fila" data-preview="assets/img/obras/obra-04-900.webp">
+          <span class="mono indice-num">03</span>
+          <h3 style="font-family: var(--ff-cuerpo); font-size: 1.1rem; font-weight: 400;">CAMPAÑA DE MARCA</h3>
+          <span class="mono" style="color: var(--niebla);">DIRECCIÓN · PRODUCCIÓN</span>
+          <span class="mono" style="color: var(--laton);">DESDE $65,000 MXN</span>
+          <span class="indice-flecha">→</span>
+        </div>
+
+        <div class="indice-fila" data-preview="assets/img/obras/obra-05-900.webp">
+          <span class="mono indice-num">04</span>
+          <h3 style="font-family: var(--ff-cuerpo); font-size: 1.1rem; font-weight: 400;">ARCHIVO DE FAMILIA</h3>
+          <span class="mono" style="color: var(--niebla);">DOMICILIO · 120 MM</span>
+          <span class="mono" style="color: var(--laton);">DESDE $16,500 MXN</span>
+          <span class="indice-flecha">→</span>
+        </div>
+
+        <div class="indice-fila" data-preview="assets/img/obras/estudio-900.webp">
+          <span class="mono indice-num">05</span>
+          <h3 style="font-family: var(--ff-cuerpo); font-size: 1.1rem; font-weight: 400;">REVELADO Y ESCANEO 35/120</h3>
+          <span class="mono" style="color: var(--niebla);">LABORATORIO PROPIO</span>
+          <span class="mono" style="color: var(--laton);">DESDE $420 MXN / ROLLO</span>
+          <span class="indice-flecha">→</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09. TESTIMONIO ÚNICO -->
+    <section class="seccion" style="background-color: var(--noche-2);">
+      <div style="max-width: 800px; margin: 0 auto; position: relative;">
+        <span style="font-family: var(--ff-display); font-size: 10rem; color: var(--laton); opacity: 0.18; position: absolute; top: -4rem; left: -3rem; line-height: 1; pointer-events: none;">“</span>
+        <span class="mono" style="color: var(--laton); margin-bottom: 1.5rem; display: block;">TESTIMONIO DE SESIÓN</span>
+        <blockquote style="font-family: var(--ff-display); font-size: clamp(1.8rem, 3.8vw, 3.2rem); font-style: italic; line-height: 1.25; margin-bottom: 2rem; color: var(--hueso);">
+          “Una foto que no puedo explicarle a nadie sin enseñarla.”
+        </blockquote>
+        <cite style="font-style: normal;" class="mono">
+          <strong style="color: var(--hueso);">Ana Sofía Rentería</strong> · dirección de arte · <span style="color: var(--niebla);">Revista Cátedra</span>
+        </cite>
+      </div>
+    </section>
+
+    <!-- 10. RESERVA CON EL PROCESO -->
+    <section id="reserva" class="seccion">
+      <div class="seccion-cabecera">
+        <div>
+          <span class="mono" style="color: var(--laton);">AGENDA</span>
+          <h2 class="seccion-titulo">Escríbenos antes <br><span class="italica" style="color: var(--niebla);">de que cambie la luz.</span></h2>
+        </div>
+      </div>
+
+      <div class="reserva-grid">
+        <!-- Izquierda: Proceso y Contacto -->
+        <div>
+          <a href="mailto:hola@lunaazulfoto.mx" style="font-family: var(--ff-display); font-size: clamp(1.8rem, 3.2vw, 2.8rem); text-decoration: underline; text-decoration-color: var(--laton); display: inline-block; margin-bottom: 2.5rem;">
+            hola@lunaazulfoto.mx
+          </a>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; border-top: 1px solid var(--linea); padding-top: 1.5rem; margin-bottom: 2.5rem;">
+            <div class="mono" style="display: flex; justify-content: space-between;">
+              <span style="color: var(--niebla);">TELÉFONO</span>
+              <span>+52 55 4095 2041</span>
+            </div>
+            <div class="mono" style="display: flex; justify-content: space-between;">
+              <span style="color: var(--niebla);">ESTUDIO</span>
+              <span>Santa María la Ribera, CDMX</span>
+            </div>
+            <div class="mono" style="display: flex; justify-content: space-between;">
+              <span style="color: var(--niebla);">HORARIO</span>
+              <span>10:00 — 19:00 HRS</span>
+            </div>
+          </div>
+
+          <!-- Caja de Proceso en 3 Renglones -->
+          <div style="background-color: var(--noche-2); border: 1px solid var(--linea); padding: 1.5rem;" class="mono">
+            <span style="color: var(--laton); display: block; margin-bottom: 1rem;">PROCESO EN 3 PASOS:</span>
+            <div style="color: var(--hueso); font-size: 0.72rem; line-height: 1.8;">
+              DÍA 0 · conversación y concepto<br>
+              SEMANA 1 · sesión en estudio o locación<br>
+              SEMANA 3 · entrega de copias y negativos
+            </div>
+          </div>
+        </div>
+
+        <!-- Derecha: Formulario -->
+        <div>
+          <form id="form-reserva" novalidate>
+            <div class="form-campo">
+              <label for="nombre" class="mono">NOMBRE COMPLETO</label>
+              <input type="text" id="nombre" name="nombre" class="form-input" required placeholder="Tu nombre">
+            </div>
+
+            <div class="form-campo">
+              <label for="email" class="mono">CORREO ELECTRÓNICO</label>
+              <input type="email" id="email" name="email" class="form-input" required placeholder="correo@ejemplo.com">
+            </div>
+
+            <div class="form-campo">
+              <label for="sesion" class="mono">TIPO DE SESIÓN</label>
+              <select id="sesion" name="sesion" class="form-input">
+                <option value="RETRATO DE AUTOR">RETRATO DE AUTOR</option>
+                <option value="EDITORIAL DE MODA">EDITORIAL DE MODA</option>
+                <option value="CAMPAÑA DE MARCA">CAMPAÑA DE MARCA</option>
+                <option value="ARCHIVO DE FAMILIA">ARCHIVO DE FAMILIA</option>
+                <option value="REVELADO Y ESCANEO">REVELADO Y ESCANEO</option>
+              </select>
+            </div>
+
+            <div class="form-campo">
+              <label for="mensaje" class="mono">DETALLES DE LA SESIÓN</label>
+              <textarea id="mensaje" name="mensaje" class="form-input" rows="3" placeholder="Cuéntanos la fecha estimada o el proyecto..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-reservar btn-ancho">ENVIAR SOLICITUD DE RESERVA</button>
+            <div id="form-estado" class="mono" style="margin-top: 1rem; font-size: 0.75rem;" aria-live="polite"></div>
+          </form>
+
+          <p style="color: var(--niebla); font-size: 0.8rem; margin-top: 1.5rem;">
+            Sin spam, sin newsletters. Contesta una persona, normalmente el mismo día.<br>
+            <span style="font-style: italic; color: var(--laton); font-size: 0.75rem;">P.D. Si escribes después de medianoche, probablemente estemos despiertos revelando.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 11. FOOTER -->
+  <footer>
+    <div class="seccion" style="padding-bottom: 2rem;">
+      <div class="footer-wordmark">
+        LUNA AZUL
+      </div>
+
+      <div class="footer-barra-final mono" style="font-size: 0.72rem;">
+        <span>© 2026 LUNA AZUL FOTO</span>
+        <span id="reloj-cdmx">17:00:00 CDMX</span>
+        <span>LUNA REAL</span>
+        <span>HECHA A MANO</span>
+        <a href="#hero" style="color: var(--laton);">SUBIR ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Principal Modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

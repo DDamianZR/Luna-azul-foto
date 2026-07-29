@@ -1,0 +1,152 @@
+/* ==========================================================================
+   TOKENS DE DISEÑO — LUNA AZUL FOTO
+   ========================================================================== */
+
+/* 1. FUENTES SELF-HOSTED (Cero requests externos) */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/InstrumentSerif-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/InstrumentSerif-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../assets/fonts/Archivo-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/Archivo-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/Archivo-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../assets/fonts/DMMono-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/DMMono-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../assets/fonts/DMMono-Medium.woff2') format('woff2');
+}
+
+/* 2. VARIABLES GLOBALES DE DISEÑO */
+:root {
+  /* Paleta Nocturna Azul — WCAG AA Validada */
+  --noche: #080B10;
+  --noche-2: #0E141C;
+  --tinta: #131B25;
+  --hueso: #E7E3D9;
+  --niebla: #8B95A3;
+  --laton: #B98B4E;
+  --luna: #BFD4E8;
+  --linea: rgba(231, 227, 217, 0.12);
+
+  /* Mecanismo de Luz Efemérides (Controlado por JS astronómico) */
+  --exposicion: 0.75;
+  --temp-scrim: #0C1826;
+  --intensidad: 0.8;
+
+  /* Tipografía */
+  --ff-display: 'Instrument Serif', Georgia, serif;
+  --ff-cuerpo: 'Archivo', system-ui, -apple-system, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+
+  /* Escala Fluida */
+  --fs-wordmark: clamp(4.2rem, 14.5vw, 12.5rem);
+  --fs-h2: clamp(2.1rem, 5.2vw, 4.2rem);
+  --fs-lead: clamp(1.4rem, 2.6vw, 2.2rem);
+  --fs-cuerpo: clamp(0.92rem, 1.1vw, 1rem);
+  --fs-mono: clamp(0.68rem, 0.8vw, 0.74rem);
+
+  /* Tiempos y Curvas de Movimiento */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-wipe: cubic-bezier(0.76, 0, 0.24, 1);
+  --duracion-reveal: 1.1s;
+  --duracion-micro: 0.32s;
+
+  /* Retícula */
+  --gap-grid: clamp(1.2rem, 2.5vw, 2.6rem);
+  --pad-site: clamp(1.2rem, 3.5vw, 4rem);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--noche);
+  color: var(--hueso);
+  font-family: var(--ff-cuerpo);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--noche);
+  color: var(--hueso);
+}
+
+/* Enfoque Accesible */
+:focus-visible {
+  outline: 2px solid var(--luna);
+  outline-offset: 3px;
+}
+
+/* Tipografía de datos Mono */
+.mono {
+  font-family: var(--ff-mono);
+  font-size: var(--fs-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Enlaces por defecto */
+a {
+  color: inherit;
+  text-decoration: none;
+}

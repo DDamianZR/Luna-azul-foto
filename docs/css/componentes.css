@@ -1,0 +1,273 @@
+/* ==========================================================================
+   COMPONENTES Y MICROINTERACCIONES — LUNA AZUL FOTO
+   ========================================================================== */
+
+/* 1. PRELOADER (Sección 01) */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--noche);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--pad-site);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.9s var(--ease-wipe);
+}
+
+.preloader.oculto {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+}
+
+.preloader-barra {
+  width: 100%;
+  height: 1px;
+  background: var(--linea);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.preloader-progreso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--luna);
+  transition: width 0.1s linear;
+}
+
+.preloader-contador {
+  font-family: var(--ff-display);
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.85;
+  color: var(--hueso);
+}
+
+/* 2. HEADER FIJO (Sección 02) */
+.header-sitio {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem var(--pad-site);
+  transition: background-color 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.header-sitio.scrolled {
+  background-color: rgba(8, 11, 16, 0.94);
+  border-bottom-color: var(--linea);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.header-brand img {
+  height: 28px;
+  width: auto;
+  border-radius: 50%;
+}
+
+.header-brand .marca-reg {
+  color: var(--laton);
+}
+
+.header-nav {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+}
+
+.nav-link {
+  position: relative;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 0.4rem 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--laton);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.header-agenda {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.agenda-punto {
+  width: 7px;
+  height: 7px;
+  background-color: #28a745;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+  animation: agendaPulsar 2s infinite;
+}
+
+@keyframes agendaPulsar {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.btn-reservar {
+  display: inline-block;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-mono);
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--hueso);
+  color: var(--hueso);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), letter-spacing 0.3s var(--ease-out);
+  border-radius: 0;
+}
+
+.btn-reservar:hover {
+  background-color: var(--laton);
+  border-color: var(--laton);
+  color: var(--noche);
+}
+
+.btn-ancho {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+
+}
+
+.btn-ancho:hover {
+  letter-spacing: 0.24em;
+}
+
+/* 3. CURSOR PERSONALIZADO DE ENCUADRE (FOTOGRAFÍA) */
+.cursor-encuadre {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s var(--ease-out);
+}
+
+@media (pointer: fine) {
+  body.cursor-active .cursor-encuadre {
+    opacity: 1;
+  }
+}
+
+.cursor-box {
+  position: relative;
+  width: 70px;
+  height: 50px;
+  border: 1px solid rgba(231, 227, 217, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out);
+}
+
+.cursor-focal {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  color: var(--laton);
+  letter-spacing: 0.1em;
+}
+
+/* 4. PREVIEW FLOTANTE DE SERVICIOS */
+.preview-flotante {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  width: 230px;
+  aspect-ratio: 4 / 5;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  transition: opacity 0.3s var(--ease-out), transform 0.12s linear;
+  overflow: hidden;
+  border: 1px solid var(--linea);
+}
+
+.preview-flotante.activo {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.preview-flotante img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 5. TARJETAS DE FIGURA OBRA */
+.pieza-obra {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--noche-2);
+}
+
+.pieza-obra figure {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.pieza-obra img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(1);
+  transform: scale(1.05);
+  transition: filter 1.4s var(--ease-out), transform 1.4s var(--ease-out);
+}
+
+.pieza-obra:hover img {
+  filter: grayscale(0);
+  transform: scale(1);
+}
+
+.pieza-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--linea);
+  margin-top: 0.8rem;
+}
+
+.pieza-titulo {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--hueso);
+}

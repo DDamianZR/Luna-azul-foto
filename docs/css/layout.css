@@ -1,0 +1,429 @@
+/* ==========================================================================
+   LAYOUT Y ESTRUCTURA EDITORIAL — LUNA AZUL FOTO
+   ========================================================================== */
+
+/* 1. SECCIONES GENERALES */
+.seccion {
+  position: relative;
+  width: 100%;
+  padding-left: var(--pad-site);
+  padding-right: var(--pad-site);
+  padding-top: clamp(4rem, 10vh, 12rem);
+  padding-bottom: clamp(4rem, 10vh, 12rem);
+  border-bottom: 1px solid var(--linea);
+}
+
+.seccion-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 1.5rem;
+  margin-bottom: clamp(2.5rem, 6vh, 6rem);
+}
+
+.seccion-titulo {
+  font-family: var(--ff-display);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.seccion-titulo span.italica {
+  font-style: italic;
+  color: var(--niebla);
+}
+
+/* 2. RETÍCULA ASIMÉTRICA 12 COLUMNAS */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap-grid);
+  width: 100%;
+}
+
+/* Spans específicos para Obra Seleccionada */
+.col-span-7-left { grid-column: 1 / 8; }
+.col-span-5-right { grid-column: 8 / 13; margin-top: 14vh; }
+
+.col-span-6-left { grid-column: 2 / 8; margin-top: 6vh; }
+.col-span-5-mid { grid-column: 8 / 13; margin-top: 18vh; }
+
+.col-span-9-left { grid-column: 1 / 10; margin-top: 8vh; }
+.col-span-4-right { grid-column: 9 / 13; margin-top: 22vh; }
+
+/* 3. HERO (100dvh) */
+.hero-seccion {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--pad-site);
+  background-color: var(--noche);
+}
+
+/* Capa 1: Portrait del Hero */
+.hero-portrait-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: grayscale(1) contrast(1.08) brightness(var(--exposicion));
+  transition: filter 0.6s var(--ease-out);
+}
+
+/* Scrim tintado dinámico */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 11, 16, 0.4) 0%,
+    var(--temp-scrim) 50%,
+    rgba(8, 11, 16, 0.95) 100%
+  );
+  opacity: var(--intensidad);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Capa 2: Canvas WebGL Luna */
+.hero-canvas-luna {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+/* Capa 3: Esquinas de Encuadre (Framing Corners) */
+.hero-esquinas {
+  position: absolute;
+  inset: var(--pad-site);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-esquinas::before,
+.hero-esquinas::after,
+.hero-esquina-bl,
+.hero-esquina-br {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: rgba(231, 227, 217, 0.4);
+  border-style: solid;
+}
+
+.hero-esquinas::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.hero-esquinas::after { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.hero-esquina-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.hero-esquina-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+/* Capa 4: Elementos HUD y Textos Above-Fold */
+.hero-kicker {
+  position: relative;
+  z-index: 5;
+  color: var(--laton);
+}
+
+.hero-wordmark-container {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.hero-wordmark {
+  font-family: var(--ff-display);
+  font-size: var(--fs-wordmark);
+  font-weight: 400;
+  line-height: 0.84;
+  letter-spacing: -0.02em;
+  color: var(--hueso);
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+.hero-wordmark span.sub {
+  display: block;
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
+  font-style: italic;
+  color: var(--niebla);
+  margin-top: 0.5rem;
+}
+
+/* Capa 5: Telemetría HUD (3 renglones) */
+.hero-hud {
+  position: relative;
+  z-index: 5;
+  align-self: flex-end;
+  background: rgba(14, 20, 28, 0.75);
+  border: 1px solid var(--linea);
+  padding: 0.8rem 1.2rem;
+  backdrop-filter: blur(8px);
+  max-width: 380px;
+}
+
+.hud-linea {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(231, 227, 217, 0.08);
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.hud-linea:last-child {
+  border-bottom: none;
+}
+
+.hud-val {
+  color: var(--luna);
+}
+
+.hud-toggle-mas {
+  background: transparent;
+  border: none;
+  color: var(--laton);
+  cursor: pointer;
+  padding: 0 0.4rem;
+  font-family: var(--ff-mono);
+}
+
+/* Cue de scroll */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: var(--pad-site);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 1px;
+  height: 48px;
+  background: rgba(231, 227, 217, 0.2);
+  overflow: hidden;
+}
+
+.hero-scroll-cue::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--laton);
+  animation: scrollCueAnim 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+}
+
+@keyframes scrollCueAnim {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* 4. HOJA DE CONTACTOS STICKY (Sección 05) */
+.hoja-contactos-contenedor {
+  position: relative;
+  height: 300vh; /* Espacio para scroll vertical que traduce horizontal */
+  width: 100%;
+}
+
+.hoja-contactos-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--noche-2);
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+}
+
+.hoja-contactos-track {
+  display: flex;
+  gap: 1px;
+  background-color: var(--linea);
+  padding: 1px 0;
+  will-change: transform;
+}
+
+.hoja-cuadro {
+  flex: 0 0 clamp(280px, 32vw, 480px);
+  background-color: var(--noche);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.hoja-cuadro img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(0.8) contrast(1.1);
+  transition: filter 0.4s var(--ease-out);
+}
+
+.hoja-cuadro:hover img {
+  filter: grayscale(0) contrast(1);
+}
+
+/* 5. LA FRASE (Sección 06) */
+.frase-seccion {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--noche);
+  padding: clamp(3rem, 12vh, 10rem) var(--pad-site);
+}
+
+.frase-texto {
+  font-family: var(--ff-display);
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  font-style: italic;
+  line-height: 1.25;
+  max-width: 24ch;
+  color: var(--hueso);
+  margin-bottom: 2.5rem;
+}
+
+/* 6. EL ESTUDIO (Sección 07) */
+.estudio-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+
+.estudio-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background-color: var(--linea);
+  border: 1px solid var(--linea);
+}
+
+.stat-celda {
+  background-color: var(--noche-2);
+  padding: clamp(1.5rem, 3vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-numero {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  color: var(--hueso);
+  line-height: 1;
+}
+
+/* 7. SERVICIOS ÍNDICE (Sección 08) */
+.indice-tabla {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--linea);
+}
+
+.indice-fila {
+  display: grid;
+  grid-template-columns: 60px 1.5fr 1.2fr 1fr 40px;
+  align-items: center;
+  padding: 1.8rem 1rem;
+  border-bottom: 1px solid var(--linea);
+  transition: background-color 0.3s var(--ease-out), padding-left 0.3s var(--ease-out);
+  cursor: pointer;
+}
+
+.indice-fila:hover {
+  background-color: var(--tinta);
+  padding-left: 2rem;
+}
+
+.indice-fila:hover .indice-num {
+  color: var(--laton);
+}
+
+.indice-fila:hover .indice-flecha {
+  transform: rotate(-45deg);
+  color: var(--laton);
+}
+
+.indice-flecha {
+  transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  font-size: 1.2rem;
+}
+
+/* 8. RESERVA Y FORMULARIO (Sección 10) */
+.reserva-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.form-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-input, select.form-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--niebla);
+  padding: 0.8rem 0;
+  color: var(--hueso);
+  font-family: var(--ff-cuerpo);
+  font-size: 1rem;
+  transition: border-color 0.3s var(--ease-out);
+  border-radius: 0;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--luna);
+}
+
+/* 9. FOOTER (Sección 11) */
+.footer-wordmark {
+  font-family: var(--ff-display);
+  font-size: clamp(3.5rem, 15vw, 14rem);
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--niebla);
+  transition: color 0.5s var(--ease-out);
+  margin-bottom: 3rem;
+  user-select: none;
+}
+
+.footer-wordmark:hover {
+  color: var(--laton);
+}
+
+.footer-barra-final {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--linea);
+}
